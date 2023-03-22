@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+	font-family: 'Jost', sans-serif;
+}
+
+body {
+	color: white;
+}
+
+.font-lato {
+	font-family: 'Lato', sans-serif !important;
+}
