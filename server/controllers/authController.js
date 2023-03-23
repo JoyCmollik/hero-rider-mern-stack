@@ -31,39 +31,11 @@ const register = async (req, res) => {
 
 	const origin = 'http://localhost:3000';
 
-	// await sendVerificationEmail({
-	// 	name: user.name,
-	// 	email: user.email,
-	// 	verificationToken: user.verificationToken,
-	// 	origin,
-	// });
 
-	// send verification token back only while testing in postman!!!!
 	res.status(StatusCodes.CREATED).json({
 		msg: 'Success! Please check your email to verify account',
 	});
 };
-
-// const verifyEmail = async (req, res) => {
-// 	const { verificationToken, email } = req.body;
-
-// 	const user = await User.findOne({ email });
-
-// 	if (!user) {
-// 		throw new CustomError.UnauthenticatedError('Verification Failed');
-// 	}
-
-// 	if (user.verificationToken !== verificationToken) {
-// 		throw new CustomError.UnauthenticatedError('Verification Failed');
-// 	}
-
-// 	user.isVerified = true;
-// 	user.verified = Date.now();
-// 	user.verificationToken = '';
-// 	await user.save();
-
-// 	res.status(StatusCodes.OK).json({ msg: 'Email Verified' });
-// };
 
 const login = async (req, res) => {
 	const { email, password } = req.body;
@@ -199,7 +171,6 @@ module.exports = {
 	register,
 	login,
 	logout,
-	// verifyEmail,
 	forgotPassword,
 	resetPassword,
 };
