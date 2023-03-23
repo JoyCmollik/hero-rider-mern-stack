@@ -36,8 +36,8 @@ app.use(
 app.use(helmet());
 app.use(
 	cors({
-		origin: 'https://hero-rider-4xa4.onrender.com/',
-		credentials: true,
+		origin: process.env.ORIGIN,
+		credentials: process.env.NODE_ENV === 'production' ? true : false,
 	})
 );
 app.use(xss());
