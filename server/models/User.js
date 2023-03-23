@@ -30,12 +30,17 @@ const UserSchema = new mongoose.Schema({
 		enum: ['admin', 'rider', 'learner'],
 		default: 'learner',
 	},
+	status: {
+		type: String,
+		enum: ['active', 'blocked'],
+		default: 'active',
+	},
 	age: {
 		type: Number,
 		required: [true, 'Please provide your age'],
 	},
 	phone: {
-		type: Number,
+		type: String,
 		required: [true, 'Please provide your phone'],
 	},
 	city: {
@@ -58,24 +63,24 @@ const UserSchema = new mongoose.Schema({
 	vehicleType: {
 		type: String,
 		enum: ['car', 'bike'],
-		default: 'car'
-	}, 
+		default: 'car',
+	},
 	vehicle: {
 		name: String,
 		model: String,
-		namaPalate: String
-	}
+		namaPalate: String,
+	},
 });
 
 UserSchema.pre('save', async function () {
-  if (!this.isModified('password')) return;
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
+	if (!this.isModified('password')) return;
+	const salt = await bcrypt.genSalt(10);
+	this.password = await bcrypt.hash(this.password, salt);
 });
 
 UserSchema.methods.comparePassword = async function (canditatePassword) {
-  const isMatch = await bcrypt.compare(canditatePassword, this.password);
-  return isMatch;
+	const isMatch = await bcrypt.compare(canditatePassword, this.password);
+	return isMatch;
 };
 
 module.exports = mongoose.model('User', UserSchema);

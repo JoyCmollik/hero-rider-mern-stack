@@ -1,6 +1,7 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 import useRegister from '../../hooks/useRegister';
+import useRegisterContext from '../../hooks/useRegisterContext';
 
 const vehicleTypeData = [
 	{
@@ -18,9 +19,17 @@ const vehicleTypeData = [
 ];
 
 const VehicleInfo = () => {
-    const { user, handleUser, vehicle, handleVehicle, userType } = useRegister();
+	const {
+		user,
+		handleUser,
+		vehicle,
+		vehicleType,
+		setVehicleType,
+		handleVehicle,
+		userType,
+	} = useRegisterContext();
 
-  return (
+	return (
 		<div className='h-full grid grid-cols-2'>
 			<div
 				className='bg-brand flex justify-center items-center p-10'
@@ -37,35 +46,26 @@ const VehicleInfo = () => {
 				{/* content */}
 				<div className='p-4 space-y-4 border rounded-lg'>
 					<div className='space-y-2'>
-							{vehicleTypeData.map(
-								({ id, text, image, type }) => (
-									<button
-										key={id}
-										onClick={() =>
-											handleUser(
-												null,
-												'vehicleType',
-												type
-											)
-										}
-										className={`bg-white p-4 flex justify-between items-center w-full rounded-lg border-2 hover:border-para ${
-											user?.vehicleType &&
-											user?.vehicleType === type
-												? 'border-brand1'
-												: 'border-gray-200'
-										}`}
-									>
-										<h4 className='text-xl font-semibold'>
-											{text}
-										</h4>
-										<img
-											className='object-cover h-14 rounded-lg'
-											src={image}
-											alt='type'
-										/>
-									</button>
-								)
-							)}
+						{vehicleTypeData.map(({ id, text, image, type }) => (
+							<button
+								key={id}
+								onClick={() => setVehicleType(type)}
+								className={`bg-white p-4 flex justify-between items-center w-full rounded-lg border-2 hover:border-para ${
+									vehicleType && vehicleType === type
+										? 'border-brand1'
+										: 'border-gray-200'
+								}`}
+							>
+								<h4 className='text-xl font-semibold'>
+									{text}
+								</h4>
+								<img
+									className='object-cover h-14 rounded-lg'
+									src={image}
+									alt='type'
+								/>
+							</button>
+						))}
 					</div>
 					{userType === 'rider' && (
 						<div className='border rounded-lg grid grid-cols-12 gap-4 p-4'>
@@ -138,7 +138,7 @@ const VehicleInfo = () => {
 				</div>
 			</div>
 		</div>
-  );
-}
+	);
+};
 
-export default VehicleInfo
+export default VehicleInfo;

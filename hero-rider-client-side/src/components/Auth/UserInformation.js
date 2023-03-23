@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useRegister from '../../hooks/useRegister';
+import useRegisterContext from '../../hooks/useRegisterContext';
 
 const UserInformation = () => {
-    const { user, handleUser, userType } = useRegister();
+    const { user, handleUser, userType } = useRegisterContext();
 	return (
 		<div className='h-full grid grid-cols-2'>
 			<div
@@ -88,9 +89,10 @@ const UserInformation = () => {
 					<div className='col-span-12 flex flex-col space-y-1'>
 						<label className='label font-medium'>Phone</label>
 						<input
-							type='number'
+							type='text'
 							placeholder='Type your full name'
 							name='phone'
+							pattern='^(?:\+8801|\+880\s?1|01)?[13-9]\d{8}$'
 							className='p-2 border rounded-lg outline-none focus-within:border-x-brand1'
 							value={user?.phone}
 							onChange={handleUser}

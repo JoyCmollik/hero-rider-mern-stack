@@ -25,10 +25,7 @@ const register = async (req, res) => {
 	const verificationToken = crypto.randomBytes(40).toString('hex');
 
 	const user = await User.create({
-		name,
-		email,
-		password,
-		role,
+		...req.body,
 		verificationToken,
 	});
 
@@ -86,10 +83,6 @@ const login = async (req, res) => {
 	const isPasswordCorrect = await user.comparePassword(password);
 	if (!isPasswordCorrect) {
 		throw new CustomError.UnauthenticatedError('Invalid Credentials');
-	}
-
-	if (!user.isVerified) {
-		throw new CustomError.UnauthenticatedError('Please verify your email');
 	}
 
 	const tokenUser = createTokenUser(user);

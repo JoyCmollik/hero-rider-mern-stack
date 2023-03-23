@@ -1,91 +1,68 @@
 import React, { useEffect } from 'react';
-import { useDropzone } from 'react-dropzone';
+import { Button, Input, Upload, message, Spin } from 'antd';
 
-const ImagesUploader = ({imageFile, setImageFile, limit}) => {
-    const { getRootProps, getInputProps, fileRejections } = useDropzone({
-		maxFiles: limit,
-		accept: 'image/*',
-		onDrop: (acceptedFiles) => {
-			setImageFile(
-				acceptedFiles.map((file) =>
-					Object.assign(file, {
-						preview: URL.createObjectURL(file),
-					})
-				)
-			);
+const ImagesUploader = ({setImageFile, limit}) => {
+   const props = {
+		name: 'image',
+		multiple: true,
+		listType: 'picture',
+		accept: '.png, .jpeg',
+		maxCount: limit,
+		action: 'https://api.imgbb.com/1/upload?expiration=9999999999&key=e2401ff27943b11283409a478fccc412',
+		// beforeUpload: (file) => {
+		// 	getBase64(file, (url) => {
+		// 		handleUploadImageToCloudinary(url);
+		// 	});
+		// 	return false;
+		// },
+		iconRender: () => {
+			return <Spin />;
 		},
-	});
-
-	const errorMessage = fileRejections?.length
-		? fileRejections[0]?.errors[0]?.message
-		: '';
-
-	useEffect(
-		() => () => {
-			// Make sure to revoke the data uris to avoid memory leaks
-			imageFile.forEach((file) => URL.revokeObjectURL(file.preview));
+		onChange: (info) => {
+			const { status } = info.file;
+			if (status !== 'uploading') {
+				console.log(info.file, info.fileList);
+			}
+			if (status === 'done') {
+				message.success(
+					`${info.file.name} file uploaded successfully.`
+				);
+				console.log(info.file.response);
+				setImageFile(() => info.file.response.data.display_url);
+			} else if (status === 'error') {
+				message.error(`${info.file.name} file upload failed.`);
+			}
 		},
-		[imageFile]
-	);
+		progress: {
+			strokeWidth: 2.5,
+			strokeColor: { '0%': '#f0f', '100%': '#ff0' },
+			showInfo: false,
+		},
+		onDrop(e) {
+			console.log('Dropped files', e.dataTransfer.files);
+		},
+   };
+
   return (
-		<section className='w-full py-4'>
-			{!imageFile?.length ? (
-				<div
-					className='flex flex-col justify-center items-center rounded-lg border border-dashed border-para py-2'
-					{...getRootProps()}
-				>
+		<div className='w-full space-y-2 flex flex-col h-fit text-center'>
+			<Upload.Dragger className='upload-list-inline' {...props}>
+				<p className='ant-upload-drag-icon text-center'>
 					<lord-icon
 						src='https://cdn.lordicon.com/fgkmrslx.json'
 						trigger='hover'
 						colors='primary:#fff,secondary:#fff'
 						style={{ width: 45, height: 45 }}
 					/>
-					<h4 className='text-base font-medium'>
-						Drop your photos here
-					</h4>
-					<small>You can add upto {limit} image.</small>
-					<p className='underline mt-4 tracking-wider cursor-pointer'>
-						or simply click here to upload
-					</p>
-					<input {...getInputProps()} />
-					<div
-						className={`${
-							errorMessage
-								? 'p-4 bg-red-100 text-red-900 rounded-lg mt-4'
-								: 'hidden'
-						}`}
-					>
-						{errorMessage && <p>{errorMessage}</p>}
-					</div>
-				</div>
-			) : (
-				<div className='border rounded-lg p-4'>
-					<div className='grid grid-cols-2 gap-4'>
-						{imageFile.map((file) => (
-							<div
-								className='h-[100px] overflow-hidden rounded-lg'
-								key={file.name}
-							>
-								<img
-									className='object-cover w-fit rounded-lg'
-									src={file.preview}
-									alt='pics'
-								/>
-							</div>
-						))}
-					</div>
-					<div className='flex justify-between items-center'>
-						<h4 className='text-base'>Want to upload again?</h4>
-						<button
-							onClick={() => setImageFile([])}
-							className='px-4 py-1 bg-red-100 text-red-400 rounded-lg'
-						>
-							Clear
-						</button>
-					</div>
-				</div>
-			)}
-		</section>
+				</p>
+				<p className='ant-upload-text'>
+					Click or drag file to this area to upload
+				</p>
+				<small className='ant-upload-hint'>
+					Please upload only one picture, selecting another will
+					replace existing one
+				</small>
+			</Upload.Dragger>
+		</div>
   );
 }
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import useRegister from '../../hooks/useRegister';
+import useRegisterContext from '../../hooks/useRegisterContext';
 import ImagesUploader from '../layout/ImagesUploader';
 
 const UserInformationImages = () => {
@@ -12,7 +13,8 @@ const UserInformationImages = () => {
 		setNidPic,
 		licensePic,
 		setLicensePic,
- } = useRegister();
+ } = useRegisterContext();
+
 	return (
 		<div className='h-full grid grid-cols-2'>
 			<div
@@ -25,7 +27,7 @@ const UserInformationImages = () => {
 					Let's upload some pictures!
 				</h1>
 			</div>
-			<div className='bg-white p-10 flex flex-col space-y-2 text-dark'>
+			<div className='bg-white p-10 flex flex-col space-y-2 text-dark overflow-y-auto'>
 				{/* <HostPlaceHeader /> */}
 				{/* content */}
 				<div className='p-4 grid grid-cols-12 gap-4 border rounded-lg'>

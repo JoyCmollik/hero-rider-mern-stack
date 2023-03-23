@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useRegister from '../../hooks/useRegister';
+import useRegisterContext from '../../hooks/useRegisterContext';
 
 const userTypeData = [
 	{
@@ -18,7 +19,7 @@ const userTypeData = [
 ];
 
 const UserType = () => {
-    const { userType, handleUserType } = useRegister();
+    const { userType, handleUserType } = useRegisterContext();
 	return (
 		<div className='h-full grid grid-cols-2'>
 			<div

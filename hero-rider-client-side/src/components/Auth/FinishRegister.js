@@ -1,8 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useRegister from '../../hooks/useRegister';
+import useRegisterContext from '../../hooks/useRegisterContext';
 import done from '../../images/Done-rafiki.png'
 
 const FinishRegister = () => {
+    const { handleRegisterUser } = useRegisterContext();
+    const navigate = useNavigate();
   return (
 		<div className='h-full grid grid-cols-2'>
 			<div
@@ -36,8 +40,9 @@ const FinishRegister = () => {
 				{/* host footer */}
 				<div className='w-full border-t border-para py-4 flex space-x-2'>
 					<button
+						onClick={() => handleRegisterUser(navigate)}
 						className={`bg-brand1 text-white w-full font-semibold px-5 py-2 rounded-3xl`}
-						disabled={true ? false : true}
+						disabled={false}
 					>
 						Finish
 					</button>
