@@ -47,5 +47,5 @@
 	"devDependencies": {
 		"tailwindcss": "^3.2.7"
 	},
-	"proxy": "http://localhost:5001/api/v1"
+	"proxy": "https://hero-rider-server-api.onrender.com/api/v1/"
 }

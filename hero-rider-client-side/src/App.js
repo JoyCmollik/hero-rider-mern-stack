@@ -6,7 +6,7 @@ import AdminHome from './dashboards/Admin/AdminHome';
 import BuyPackages from './pages/BuyPackages/BuyPackages';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://hero-rider-server-api.onrender.com/api/v1/';
+axios.defaults.baseURL = 'https://hero-rider-server-api.onrender.com/api/v1';
 axios.defaults.withCredentials = true;
 
 function App() {

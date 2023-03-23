@@ -1,4 +1,4 @@
- require('dotenv').config();
+require('dotenv').config();
 require('express-async-errors');
 // express
 
@@ -28,13 +28,18 @@ const errorHandlerMiddleware = require('./middleware/error-handler');
 
 app.set('trust proxy', 1);
 app.use(
-  rateLimiter({
-    windowMs: 15 * 60 * 1000,
-    max: 60,
-  })
+	rateLimiter({
+		windowMs: 15 * 60 * 1000,
+		max: 60,
+	})
 );
 app.use(helmet());
-app.use(cors());
+app.use(
+	cors({
+		origin: 'https://hero-rider-4xa4.onrender.com/',
+		credentials: true,
+	})
+);
 app.use(xss());
 app.use(mongoSanitize());
 
@@ -54,14 +59,14 @@ app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 5001;
 const start = async () => {
-  try {
-    await connectDB(process.env.MONGO_URL);
-    app.listen(port, () =>
-      console.log(`Server is listening on port ${port}...`)
-    );
-  } catch (error) {
-    console.log(error);
-  }
+	try {
+		await connectDB(process.env.MONGO_URL);
+		app.listen(port, () =>
+			console.log(`Server is listening on port ${port}...`)
+		);
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 start();
