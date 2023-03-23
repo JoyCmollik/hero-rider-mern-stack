@@ -28,7 +28,9 @@ const UserInformationImages = () => {
 				</h1>
 			</div>
 			<div className='bg-white p-10 flex flex-col space-y-2 text-dark overflow-y-auto'>
-				{/* <HostPlaceHeader /> */}
+				<div className='flex justify-end'>
+					<Link to='/'>Exit to home</Link>
+				</div>
 				{/* content */}
 				<div className='p-4 grid grid-cols-12 gap-4 border rounded-lg'>
 					<div className='col-span-12 bg-brand1 rounded-lg p-4 text-white'>
@@ -43,7 +45,9 @@ const UserInformationImages = () => {
 						/>
 					</div>
 					<div
-						className={`${userType === 'rider' ? 'col-span-6' : 'col-span-12'} bg-dark rounded-lg p-4 text-white`}
+						className={`${
+							userType === 'rider' ? 'col-span-6' : 'col-span-12'
+						} bg-dark rounded-lg p-4 text-white`}
 					>
 						<label className='label font-medium'>NID Picture</label>
 						{/* NID picture */}

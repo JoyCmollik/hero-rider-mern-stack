@@ -13,6 +13,8 @@ const {
 	updateUserPassword,
 } = require('../controllers/userController');
 
+const stripeController = require('../controllers/stripeController');
+
 router
 	.route('/')
 	.get(authenticateUser, authorizePermissions('admin'), getAllUsers);
@@ -22,6 +24,7 @@ router.route('/updateUser').patch(authenticateUser, updateUser);
 router
 	.route('/block-user')
 	.patch(authenticateUser, authorizePermissions('admin'), blockUser);
+router.route('/create-payment-intent').post(authenticateUser, stripeController);
 router.route('/updateUserPassword').patch(authenticateUser, updateUserPassword);
 
 router.route('/:id').get(authenticateUser, getSingleUser);

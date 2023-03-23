@@ -33,7 +33,9 @@ const UserType = () => {
 				</h1>
 			</div>
 			<div className='bg-white p-10 flex flex-col text-dark'>
-				{/* <HostPlaceHeader /> */}
+				<div className='flex justify-end'>
+					<Link to='/'>Exit to home</Link>
+				</div>
 				{/* content */}
 				<div className='flex-grow flex flex-col space-y-4 justify-center items-center'>
 					{userTypeData.map(({ id, type, image, role }) => (

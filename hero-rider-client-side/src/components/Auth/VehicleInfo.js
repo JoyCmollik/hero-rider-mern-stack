@@ -42,7 +42,9 @@ const VehicleInfo = () => {
 				</h1>
 			</div>
 			<div className='bg-white p-10 flex flex-col space-y-2 text-dark'>
-				{/* <HostPlaceHeader /> */}
+				<div className='flex justify-end'>
+					<Link to='/'>Exit to home</Link>
+				</div>
 				{/* content */}
 				<div className='p-4 space-y-4 border rounded-lg'>
 					<div className='space-y-2'>
