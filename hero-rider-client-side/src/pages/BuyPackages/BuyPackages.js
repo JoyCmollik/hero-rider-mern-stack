@@ -4,7 +4,6 @@ import bikeImage from '../../images/bikedrive.png';
 import Navbar from '../../components/layout/Navbar';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { PaymentElement } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import { message } from 'antd';
 import CheckoutForm from './CheckoutForm';

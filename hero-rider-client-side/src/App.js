@@ -4,6 +4,7 @@ import Home from './pages/Home/Home';
 import RegisterComponent from './pages/RegisterComponent/RegisterComponent';
 import AdminHome from './dashboards/Admin/AdminHome';
 import BuyPackages from './pages/BuyPackages/BuyPackages';
+import PaymentSuccess from './pages/BuyPackages/PaymentSuccess';
 
 function App() {
 	return (
@@ -13,6 +14,7 @@ function App() {
 				<Route path='register/*' element={<RegisterComponent />} />
 				<Route path='dashboard/admin' element={<AdminHome />} />
 				<Route path='buy-package' element={<BuyPackages />} />
+				<Route path='payment-success' element={<PaymentSuccess />} />
 			</Routes>
 		</div>
 	);
