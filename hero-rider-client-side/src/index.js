@@ -4,6 +4,11 @@ import './index.css';
 import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AuthProvider from './contexts/AuthProvider';
+import axios from 'axios';
+
+axios.defaults.baseURL = process.env.REACT_APP_BASEURL;
+axios.defaults.withCredentials =
+	process.env.REACT_APP_PRODUCTION === 'true' ? true : false;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
