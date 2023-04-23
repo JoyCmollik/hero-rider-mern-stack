@@ -61,6 +61,7 @@ const AllUsers = () => {
 	const [users, setUsers] = useState([]);
 	const [filterAge, setFilterAge] = useState({ min: 0, max: 0 });
 	const [userStat, setUserStat] = useState({ ...initialStat });
+	const [newState, setNewState] = useState(null);
 	// ----- row selection -----
 	const fetchUsers = (fetchUrl) => {
 		setIsFetching(true);
