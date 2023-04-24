@@ -19,6 +19,7 @@ const initialVehicle = {
 	name: '',
 	model: '',
 	namePalate: '',
+	registration: '',
 };
 
 const useRegister = () => {
