@@ -6,9 +6,11 @@ import useAuth from '../../hooks/useAuth';
 const Login = () => {
 	const { register, handleSubmit } = useForm();
 	const { handleLogin, loading } = useAuth();
+
 	const onSubmit = (data) => {
 		handleLogin(data);
 	};
+
 	return (
 		<form className='space-y-4' onSubmit={handleSubmit(onSubmit)}>
 			{/* form input */}
